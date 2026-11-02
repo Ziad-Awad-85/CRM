@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Identity;
-namespace CRM.API.Areas.Identity.Data;
+namespace CRM.Model.Identity;
 // Add profile data for application users by adding properties to the ApplicationUser class
 public class ApplicationUser : IdentityUser
 {
