@@ -8,6 +8,9 @@ namespace CRM.WEBBlazor
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var apiBaseAddress = builder.Configuration["ApiBaseAddress"];
+            builder.Services.AddScoped(SP => new HttpClient { BaseAddress = new Uri(apiBaseAddress!) });
+
             // Add services to the container.
             builder.Services.AddRazorComponents();
 
