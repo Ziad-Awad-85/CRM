@@ -1,7 +1,6 @@
-using Microsoft.OpenApi;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using CRM.Model.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 namespace CRM.API
 {
     public class Program
