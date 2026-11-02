@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="CRM.API/CRM.API.csproj" />
+  <Project Path="CRM.Model/CRM.Model.csproj" />
   <Project Path="CRM.Utility/CRM.Utility.csproj" />
   <Project Path="CRM.WEBBlazor/CRM.WEBBlazor.csproj" />
 </Solution>
