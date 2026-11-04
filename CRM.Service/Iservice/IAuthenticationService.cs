@@ -1,10 +1,11 @@
-﻿using CRM.Model.InputModels;
+﻿using CRM.Model.ApplicationModels;
+using CRM.Model.InputModels;
 
 namespace CRM.Service.Iservice
 {
     public interface IAuthenticationService
     {
-        Task<bool> LoginAsync(ApplicationUserLoginInputModel model);
+        Task<ResponseModel<bool>> LoginAsync(ApplicationUserLoginInputModel model);
         Task<bool> RegisterAsync(ApplicationUserRegisterInputModel model);
         Task<bool> ForgetPasswordAsync(ApplicationUserRegisterInputModel model);
         Task<bool> RestPasswordAsync(ApplicationUserRegisterInputModel model);
