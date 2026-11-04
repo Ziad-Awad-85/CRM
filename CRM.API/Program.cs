@@ -1,8 +1,12 @@
 using CRM.DataAccess;
-using CRM.Model.Identity;
+using CRM.Model.IdentityModels;
+using CRM.Service;
+using CRM.Service.Iservice;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using System.Diagnostics;
+
 namespace CRM.API
 {
     public class Program
@@ -24,6 +28,13 @@ namespace CRM.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CRM API", Version = "v1" });
             });
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
