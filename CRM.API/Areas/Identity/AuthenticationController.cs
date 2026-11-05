@@ -5,8 +5,8 @@ using System.ComponentModel;
 
 namespace CRM.API.Areas.Identity
 {
-    [Area("PublicArea")]
-    [DisplayName("Public Controller")]
+    [Area("Identity")]
+    [DisplayName("Authentication Controller")]
     [Route("api/[area]/[controller]")]
     [ApiController]
     public class AuthenticationController(IAuthenticationService _authenticationService) : ControllerBase
@@ -24,7 +24,7 @@ namespace CRM.API.Areas.Identity
         public async Task<IActionResult> Register([FromBody] ApplicationUserRegisterInputModel model)
         {
             var response = await _authenticationService.RegisterAsync(model);
-            return response ? Ok(response) : StatusCode(500);
+            return response.IsSuccess ? Created() : BadRequest(response);
         }
 
         [HttpPost("forget-password")]
