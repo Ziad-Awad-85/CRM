@@ -216,4 +216,70 @@
   <data name="gender-Other" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="title-confirm-email" xml:space="preserve">
+    <value>Confirm Email</value>
+  </data>
+  <data name="message-user-not-found" xml:space="preserve">
+    <value>User not found!</value>
+  </data>
+  <data name="input-verification-code" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+  <data name="message-code-four-digit" xml:space="preserve">
+    <value>Code must contain exactly 4 digits.</value>
+  </data>
+  <data name="message-verification-code-required" xml:space="preserve">
+    <value>Verification code is required!</value>
+  </data>
+  <data name="info-verify-code-sent" xml:space="preserve">
+    <value>The verification code has been sent to your email, please take that code and enter it in the box without closing this page.</value>
+  </data>
+  <data name="button-activate" xml:space="preserve">
+    <value>Activate</value>
+  </data>
+  <data name="button-verify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="message-invalid-confirmation-code" xml:space="preserve">
+    <value>Invalid code!</value>
+  </data>
+  <data name="link-confirm-email" xml:space="preserve">
+    <value>Confirm Email</value>
+  </data>
+  <data name="link-forget-password" xml:space="preserve">
+    <value>Forget Password</value>
+  </data>
+  <data name="message-failed-save-verification-code" xml:space="preserve">
+    <value>Failed to save verification code.</value>
+  </data>
+  <data name="message-email-confirmation-failed" xml:space="preserve">
+    <value>Email confirmation failed!</value>
+  </data>
+  <data name="message-email-already-confirmed" xml:space="preserve">
+    <value>Email already confirmed!</value>
+  </data>
+  <data name="email-template-confirm-email-raw-text" xml:space="preserve">
+    <value>Dear {FullName}, Please Verify Your Email Address by this 4-digit code: {Code}.</value>
+  </data>
+  <data name="button-forget-password" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+  <data name="button-change-password" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="email-template-forgot-password-raw-text" xml:space="preserve">
+    <value>Dear {FullName}, To reset your password, please use the following 4-digit code: {Code}.</value>
+  </data>
+  <data name="message-password-change-failed" xml:space="preserve">
+    <value>Password change failed.</value>
+  </data>
+  <data name="title-forgot-password" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
+  <data name="message-unable-reset-password" xml:space="preserve">
+    <value>Unable to reset password</value>
+  </data>
+  <data name="button-reset-password" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
 </root>

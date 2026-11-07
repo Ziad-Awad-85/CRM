@@ -2,7 +2,6 @@
 using CRM.Model.IdentityModels;
 using CRM.Model.InputModels;
 using CRM.Service.Iservice;
-using CRM.Utility;
 using CRM.Utility.IUtility;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Mail;
@@ -80,7 +79,7 @@ namespace CRM.Service
                 Data = false
             };
         }
-        
+
         public async Task<ResponseModel<bool>> ConfirmEmailAsync(ApplicationUserConfirmEmailInputModel model)
         {
             ArgumentNullException.ThrowIfNull(model.Email);
@@ -129,28 +128,130 @@ namespace CRM.Service
 
         }
 
+        public async Task<ResponseModel<bool>> ConfirmEmailVerifyCodeAsync(ApplicationUserVerificationBaseInputModel model)
+        {
+            ArgumentNullException.ThrowIfNull(model.Email);
+            ArgumentNullException.ThrowIfNull(model.Code);
 
+            var user = userManager.FindByEmailAsync(model.Email).Result;
+            if (user is null)
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "User not found"
+                };
+            }
 
-        public async Task<bool> ChangePasswordAsync(ApplicationUserRegisterInputModel model)
+            bool isCodeValid = user.VerificationCode != null && user.VerificationCode.ToString() == model.Code;
+            if (isCodeValid)
+            {
+                user.EmailConfirmed = true;
+                user.Activity = true;
+                var result = await userManager.UpdateAsync(user);
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = result.Succeeded,
+                    Message = result.Succeeded ? "Email confirmed successfully" : "Failed to confirm email"
+                };
+            }
+            else
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "Invalid verification code"
+                };
+            }
+
+        }
+
+        public async Task<ResponseModel<bool>> ForgotPasswordAsync(ApplicationUserForgotPasswordInputModel model)
+        {
+            ArgumentNullException.ThrowIfNull(model.Email);
+            var user = userManager.FindByEmailAsync(model.Email).Result;
+            if (user == null)
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "User not found",
+                    Data = false
+                };
+            }
+
+            user.VerificationCode = GenerateVerificationCode();
+            var result = await userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "Failed to save verification code"
+                };
+            }
+
+            model.Code = user.VerificationCode.ToString();
+            model.FullName = user.FullName!;
+            await SendEmailConfirmationCodeAsync(model);
+
+            return new ResponseModel<bool>
+            {
+                IsSuccess = true,
+                Message = "Verification code sent successfully"
+            };
+        }
+
+        public async Task<ResponseModel<bool>> ChangePasswordAsync(ApplicationUserRegisterInputModel model)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> ForgetPasswordAsync(ApplicationUserRegisterInputModel model)
+
+
+        public async Task<ResponseModel<bool>> RefreshTokenAsync(ApplicationUserRegisterInputModel model)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> RefreshTokenAsync(ApplicationUserRegisterInputModel model)
+        public async Task<ResponseModel<bool>> ResetPasswordAsync(ApplicationUserForgotPasswordInputModel model)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(model.Email);
+            ArgumentNullException.ThrowIfNull(model.Code);
+            ArgumentNullException.ThrowIfNull(model.Password);
+
+            var user = userManager.FindByEmailAsync(model.Email).Result;
+            if (user is null)
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "User not found"
+                };
+            }
+
+            bool isCodeValid = user.VerificationCode != null && user.VerificationCode.ToString() == model.Code;
+            if (isCodeValid)
+            {
+                var token = await userManager.GeneratePasswordResetTokenAsync(user);
+                var result = await userManager.ResetPasswordAsync(user, token, model.Password);
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = result.Succeeded,
+                    Message = result.Succeeded ? "Password reset successfully" : "Failed to reset password"
+                };
+            }
+            else
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "Invalid verification code"
+                };
+            }
         }
 
-        public async Task<bool> RestPasswordAsync(ApplicationUserRegisterInputModel applicationUserRestPasswordInput)
-        {
-            throw new NotImplementedException();
-        } 
-        
         private short? GenerateVerificationCode()
         {
             Random random = new();
@@ -169,5 +270,6 @@ namespace CRM.Service
             mailMessage.AlternateViews.Add(alternateView);
             await applicationEmailSender.SendEmailAsync(mailMessage);
         }
+
     }
 }
