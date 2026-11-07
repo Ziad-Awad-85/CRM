@@ -2,25 +2,20 @@
 using CRM.Model.IdentityModels;
 using CRM.Model.InputModels;
 using CRM.Service.Iservice;
+using CRM.Utility;
+using CRM.Utility.IUtility;
 using Microsoft.AspNetCore.Identity;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace CRM.Service
 {
     public class AuthenticationService(
         UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager
+        SignInManager<ApplicationUser> signInManager,
+        IApplicationEmailSender applicationEmailSender
         ) : IAuthenticationService
     {
-        public async Task<bool> ChangePasswordAsync(ApplicationUserRegisterInputModel model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> ForgetPasswordAsync(ApplicationUserRegisterInputModel model)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<ResponseModel<bool>> LoginAsync(ApplicationUserLoginInputModel model)
         {
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
@@ -44,11 +39,6 @@ namespace CRM.Service
                 Message = errorMessage,
                 Data = false
             };
-        }
-
-        public async Task<bool> RefreshTokenAsync(ApplicationUserRegisterInputModel model)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<ResponseModel<bool>> RegisterAsync(ApplicationUserRegisterInputModel model)
@@ -90,10 +80,94 @@ namespace CRM.Service
                 Data = false
             };
         }
+        
+        public async Task<ResponseModel<bool>> ConfirmEmailAsync(ApplicationUserConfirmEmailInputModel model)
+        {
+            ArgumentNullException.ThrowIfNull(model.Email);
+            var user = userManager.FindByEmailAsync(model.Email).Result;
+            if (user == null)
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "User not found",
+                    Data = false
+                };
+            }
+
+            if (user.EmailConfirmed)
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "Email already confirmed",
+                    Data = false
+                };
+            }
+
+            user.VerificationCode = GenerateVerificationCode();
+            var result = await userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return new ResponseModel<bool>
+                {
+                    IsSuccess = false,
+                    Message = "Failed to save verification code"
+                };
+            }
+
+            model.Code = user.VerificationCode.ToString();
+            model.FullName = user.FullName!;
+            await SendEmailConfirmationCodeAsync(model);
+
+            return new ResponseModel<bool>
+            {
+                IsSuccess = true,
+                Message = "Verification code sent successfully"
+            };
+
+        }
+
+
+
+        public async Task<bool> ChangePasswordAsync(ApplicationUserRegisterInputModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> ForgetPasswordAsync(ApplicationUserRegisterInputModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> RefreshTokenAsync(ApplicationUserRegisterInputModel model)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<bool> RestPasswordAsync(ApplicationUserRegisterInputModel applicationUserRestPasswordInput)
         {
             throw new NotImplementedException();
+        } 
+        
+        private short? GenerateVerificationCode()
+        {
+            Random random = new();
+            return (short)random.Next(1000, 9999);
+        }
+
+        private async Task SendEmailConfirmationCodeAsync(ApplicationUserConfirmEmailInputModel model)
+        {
+            MailMessage mailMessage = new();
+            mailMessage.To.Add(model.Email);
+            mailMessage.Subject = "CRM Application";
+
+            var emailContent = model.EmailTemplate.Replace("{FullName}", model.FullName)
+                                                  .Replace("{Code}", model.Code);
+            var alternateView = AlternateView.CreateAlternateViewFromString(emailContent, null, MediaTypeNames.Text.Html);
+            mailMessage.AlternateViews.Add(alternateView);
+            await applicationEmailSender.SendEmailAsync(mailMessage);
         }
     }
 }
