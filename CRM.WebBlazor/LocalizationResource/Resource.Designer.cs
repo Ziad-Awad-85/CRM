@@ -8,11 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CRM.WebBlazor.LocalizationResource
-{
+namespace CRM.WebBlazor.LocalizationResource {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -20,656 +19,538 @@ namespace CRM.WebBlazor.LocalizationResource
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resource
-    {
-
+    public class Resource {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource()
-        {
+        internal Resource() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CRM.WebBlazor.LocalizationResource.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Activate.
         /// </summary>
-        public static string button_activate
-        {
-            get
-            {
+        public static string button_activate {
+            get {
                 return ResourceManager.GetString("button-activate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Change Password.
         /// </summary>
-        public static string button_change_password
-        {
-            get
-            {
+        public static string button_change_password {
+            get {
                 return ResourceManager.GetString("button-change-password", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Forgot Password?.
         /// </summary>
-        public static string button_forget_password
-        {
-            get
-            {
+        public static string button_forget_password {
+            get {
                 return ResourceManager.GetString("button-forget-password", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        public static string button_login
-        {
-            get
-            {
+        public static string button_login {
+            get {
                 return ResourceManager.GetString("button-login", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
-        public static string button_register
-        {
-            get
-            {
+        public static string button_register {
+            get {
                 return ResourceManager.GetString("button-register", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
-        public static string button_reset
-        {
-            get
-            {
+        public static string button_reset {
+            get {
                 return ResourceManager.GetString("button-reset", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reset Password.
         /// </summary>
-        public static string button_reset_password
-        {
-            get
-            {
+        public static string button_reset_password {
+            get {
                 return ResourceManager.GetString("button-reset-password", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Verify.
         /// </summary>
-        public static string button_verify
-        {
-            get
-            {
+        public static string button_verify {
+            get {
                 return ResourceManager.GetString("button-verify", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Dear {FullName}, Please Verify Your Email Address by this 4-digit code: {Code}..
         /// </summary>
-        public static string email_template_confirm_email_raw_text
-        {
-            get
-            {
+        public static string email_template_confirm_email_raw_text {
+            get {
                 return ResourceManager.GetString("email-template-confirm-email-raw-text", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Dear {FullName}, To reset your password, please use the following 4-digit code: {Code}..
         /// </summary>
-        public static string email_template_forgot_password_raw_text
-        {
-            get
-            {
+        public static string email_template_forgot_password_raw_text {
+            get {
                 return ResourceManager.GetString("email-template-forgot-password-raw-text", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Female.
         /// </summary>
-        public static string gender_Female
-        {
-            get
-            {
+        public static string gender_Female {
+            get {
                 return ResourceManager.GetString("gender-Female", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Male.
         /// </summary>
-        public static string gender_Male
-        {
-            get
-            {
+        public static string gender_Male {
+            get {
                 return ResourceManager.GetString("gender-Male", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Other.
         /// </summary>
-        public static string gender_Other
-        {
-            get
-            {
+        public static string gender_Other {
+            get {
                 return ResourceManager.GetString("gender-Other", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The verification code has been sent to your email, please take that code and enter it in the box without closing this page..
         /// </summary>
-        public static string info_verify_code_sent
-        {
-            get
-            {
+        public static string info_verify_code_sent {
+            get {
                 return ResourceManager.GetString("info-verify-code-sent", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
-        public static string input_confirm_password
-        {
-            get
-            {
+        public static string input_confirm_password {
+            get {
                 return ResourceManager.GetString("input-confirm-password", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Date of Birth.
         /// </summary>
-        public static string input_dateofbirth
-        {
-            get
-            {
+        public static string input_dateofbirth {
+            get {
                 return ResourceManager.GetString("input-dateofbirth", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
-        public static string input_email
-        {
-            get
-            {
+        public static string input_email {
+            get {
                 return ResourceManager.GetString("input-email", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
-        public static string input_firstname
-        {
-            get
-            {
+        public static string input_firstname {
+            get {
                 return ResourceManager.GetString("input-firstname", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Gender.
         /// </summary>
-        public static string input_gender
-        {
-            get
-            {
+        public static string input_gender {
+            get {
                 return ResourceManager.GetString("input-gender", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
-        public static string input_lastname
-        {
-            get
-            {
+        public static string input_lastname {
+            get {
                 return ResourceManager.GetString("input-lastname", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        public static string input_password
-        {
-            get
-            {
+        public static string input_password {
+            get {
                 return ResourceManager.GetString("input-password", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Verification code.
         /// </summary>
-        public static string input_verification_code
-        {
-            get
-            {
+        public static string input_verification_code {
+            get {
                 return ResourceManager.GetString("input-verification-code", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Errors.
         /// </summary>
-        public static string label_errors
-        {
-            get
-            {
+        public static string label_errors {
+            get {
                 return ResourceManager.GetString("label-errors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Confirm Email.
         /// </summary>
-        public static string link_confirm_email
-        {
-            get
-            {
+        public static string link_confirm_email {
+            get {
                 return ResourceManager.GetString("link-confirm-email", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Forget Password.
         /// </summary>
-        public static string link_forget_password
-        {
-            get
-            {
+        public static string link_forget_password {
+            get {
                 return ResourceManager.GetString("link-forget-password", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Code must contain exactly 4 digits..
         /// </summary>
-        public static string message_code_four_digit
-        {
-            get
-            {
+        public static string message_code_four_digit {
+            get {
                 return ResourceManager.GetString("message-code-four-digit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Passwords do not match.
         /// </summary>
-        public static string message_confirm_password_match
-        {
-            get
-            {
+        public static string message_confirm_password_match {
+            get {
                 return ResourceManager.GetString("message-confirm-password-match", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Confirm password is required!.
         /// </summary>
-        public static string message_confirm_password_required
-        {
-            get
-            {
+        public static string message_confirm_password_required {
+            get {
                 return ResourceManager.GetString("message-confirm-password-required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Email already confirmed!.
         /// </summary>
-        public static string message_email_already_confirmed
-        {
-            get
-            {
+        public static string message_email_already_confirmed {
+            get {
                 return ResourceManager.GetString("message-email-already-confirmed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Email confirmation failed!.
         /// </summary>
-        public static string message_email_confirmation_failed
-        {
-            get
-            {
+        public static string message_email_confirmation_failed {
+            get {
                 return ResourceManager.GetString("message-email-confirmation-failed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Email already exists..
         /// </summary>
-        public static string message_email_exists
-        {
-            get
-            {
+        public static string message_email_exists {
+            get {
                 return ResourceManager.GetString("message-email-exists", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Email format is not correct..
         /// </summary>
-        public static string message_email_format
-        {
-            get
-            {
+        public static string message_email_format {
+            get {
                 return ResourceManager.GetString("message-email-format", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Email is required!.
         /// </summary>
-        public static string message_email_required
-        {
-            get
-            {
+        public static string message_email_required {
+            get {
                 return ResourceManager.GetString("message-email-required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Failed to save verification code..
         /// </summary>
-        public static string message_failed_save_verification_code
-        {
-            get
-            {
+        public static string message_failed_save_verification_code {
+            get {
                 return ResourceManager.GetString("message-failed-save-verification-code", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to First name is required!.
         /// </summary>
-        public static string message_firstname_required
-        {
-            get
-            {
+        public static string message_firstname_required {
+            get {
                 return ResourceManager.GetString("message-firstname-required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Invalid code!.
         /// </summary>
-        public static string message_invalid_confirmation_code
-        {
-            get
-            {
+        public static string message_invalid_confirmation_code {
+            get {
                 return ResourceManager.GetString("message-invalid-confirmation-code", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Invalid login attempt..
         /// </summary>
-        public static string message_invalid_login
-        {
-            get
-            {
+        public static string message_invalid_login {
+            get {
                 return ResourceManager.GetString("message-invalid-login", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Invalid user data..
         /// </summary>
-        public static string message_invalid_user_data
-        {
-            get
-            {
+        public static string message_invalid_user_data {
+            get {
                 return ResourceManager.GetString("message-invalid-user-data", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Last name is required!.
         /// </summary>
-        public static string message_lastname_required
-        {
-            get
-            {
+        public static string message_lastname_required {
+            get {
                 return ResourceManager.GetString("message-lastname-required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Login is not allowed..
         /// </summary>
-        public static string message_login_not_allowed
-        {
-            get
-            {
+        public static string message_login_not_allowed {
+            get {
                 return ResourceManager.GetString("message-login-not-allowed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password change failed..
         /// </summary>
-        public static string message_password_change_failed
-        {
-            get
-            {
+        public static string message_password_change_failed {
+            get {
                 return ResourceManager.GetString("message-password-change-failed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password is required!.
         /// </summary>
-        public static string message_password_required
-        {
-            get
-            {
+        public static string message_password_required {
+            get {
                 return ResourceManager.GetString("message-password-required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password must contain at least 8 characters, one uppercase letter, one number and one symbol..
         /// </summary>
-        public static string message_password_validation
-        {
-            get
-            {
+        public static string message_password_validation {
+            get {
                 return ResourceManager.GetString("message-password-validation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password is too weak..
         /// </summary>
-        public static string message_password_weak
-        {
-            get
-            {
+        public static string message_password_weak {
+            get {
                 return ResourceManager.GetString("message-password-weak", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Two-factor authentication is required!.
         /// </summary>
-        public static string message_two_factor_required
-        {
-            get
-            {
+        public static string message_two_factor_required {
+            get {
                 return ResourceManager.GetString("message-two-factor-required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Unable to reset password.
         /// </summary>
-        public static string message_unable_reset_password
-        {
-            get
-            {
+        public static string message_unable_reset_password {
+            get {
                 return ResourceManager.GetString("message-unable-reset-password", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An unknown error occurred during the request..
         /// </summary>
-        public static string message_unknown_error
-        {
-            get
-            {
+        public static string message_unknown_error {
+            get {
                 return ResourceManager.GetString("message-unknown-error", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to User is locked out..
         /// </summary>
-        public static string message_user_locked_out
-        {
-            get
-            {
+        public static string message_user_locked_out {
+            get {
                 return ResourceManager.GetString("message-user-locked-out", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to User not found!.
         /// </summary>
-        public static string message_user_not_found
-        {
-            get
-            {
+        public static string message_user_not_found {
+            get {
                 return ResourceManager.GetString("message-user-not-found", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Verification code is required!.
         /// </summary>
-        public static string message_verification_code_required
-        {
-            get
-            {
+        public static string message_verification_code_required {
+            get {
                 return ResourceManager.GetString("message-verification-code-required", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Confirm Email.
         /// </summary>
-        public static string title_confirm_email
-        {
-            get
-            {
+        public static string title_confirm_email {
+            get {
                 return ResourceManager.GetString("title-confirm-email", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Forgot Password.
         /// </summary>
-        public static string title_forgot_password
-        {
-            get
-            {
+        public static string title_forgot_password {
+            get {
                 return ResourceManager.GetString("title-forgot-password", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        public static string title_login
-        {
-            get
-            {
+        public static string title_login {
+            get {
                 return ResourceManager.GetString("title-login", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
-        public static string title_register
-        {
-            get
-            {
+        public static string title_register {
+            get {
                 return ResourceManager.GetString("title-register", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hello, welcome to our CRM.
         /// </summary>
-        public static string WelcomeMessage
-        {
-            get
-            {
+        public static string WelcomeMessage {
+            get {
                 return ResourceManager.GetString("WelcomeMessage", resourceCulture);
             }
         }
