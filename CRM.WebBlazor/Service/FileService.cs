@@ -55,7 +55,7 @@ namespace CRM.WebBlazor.Service
                     resizedFile = await file.RequestImageFileAsync(file.ContentType, 500, 500);
 
                 using var stream = new MemoryStream();
-                await resizedFile.OpenReadStream().CopyToAsync(stream);
+                await resizedFile.OpenReadStream(MaxAllowedFileSize).CopyToAsync(stream);
 
                 var fileExtension = Path.GetExtension(file.Name);
                 var fileName = $"{Guid.NewGuid()}{fileExtension}";
