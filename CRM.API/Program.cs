@@ -1,7 +1,6 @@
 using CRM.DataAccess;
 using CRM.Model.IdentityModels;
-using CRM.Service;
-using CRM.Service.Iservice;
+using CRM.Service.Identity;
 using CRM.Utility;
 using CRM.Utility.IUtility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,8 +35,9 @@ namespace CRM.API
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT"
                 });
                 c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
                 {
@@ -71,13 +71,16 @@ namespace CRM.API
                 {
                     ValidIssuer = builder.Configuration["TokenConfiguration:Issuer"],
                     ValidAudience = builder.Configuration["TokenConfiguration:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenConfiguration:SigningKey"]!)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenConfiguration:SecretKey"]!)),
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
                 });
+
+            builder.Services.AddScoped<IUserService, UserService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -96,8 +99,9 @@ namespace CRM.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "areas",

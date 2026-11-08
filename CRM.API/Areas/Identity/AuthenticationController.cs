@@ -1,5 +1,5 @@
 ﻿using CRM.Model.InputModels;
-using CRM.Service.Iservice;
+using CRM.Service.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 
@@ -56,14 +56,6 @@ namespace CRM.API.Areas.Identity
         public async Task<IActionResult> ResetPassword([FromBody] ApplicationUserForgotPasswordInputModel model)
         {
             var response = await _authenticationService.ResetPasswordAsync(model);
-            return response.IsSuccess ? Ok(response) : StatusCode(500);
-        }
-
-        [HttpPost("change-password")]
-        [DisplayName("Change Password")]
-        public async Task<IActionResult> ChangePassword([FromBody] ApplicationUserRegisterInputModel model)
-        {
-            var response = await _authenticationService.ChangePasswordAsync(model);
             return response.IsSuccess ? Ok(response) : StatusCode(500);
         }
 
