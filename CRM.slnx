@@ -4,5 +4,5 @@
   <Project Path="CRM.Model/CRM.Model.csproj" />
   <Project Path="CRM.Service/CRM.Service.csproj" />
   <Project Path="CRM.Utility/CRM.Utility.csproj" />
-  <Project Path="CRM.WEBBlazor/CRM.WEBBlazor.csproj" DisplayName="CRM.WebBlazor" />
+  <Project Path="CRM.WebBlazor/CRM.WebBlazor.csproj" />
 </Solution>
