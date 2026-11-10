@@ -1,6 +1,7 @@
 ﻿using CRM.Model.ApplicationModels;
 using CRM.Model.IdentityModels;
 using CRM.Model.InputModels;
+using CRM.Model.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,18 @@ namespace CRM.Service.Identity
             {
                 IsSuccess = result.Succeeded,
                 Message = result.Succeeded ? "Password changed successfully" : "Unable to change password",
+            };
+        }
+
+        public async Task<ResponseModel<ApplicationUserProfileViewModel>> GetUserProfileAsync(ApplicationUserContext userContext)
+        {
+            ArgumentNullException.ThrowIfNull(userContext.UserId);
+            var user = await userManager.FindByIdAsync(userContext.UserId) ?? throw new Exception("Unable to get user");
+            return new ResponseModel<ApplicationUserProfileViewModel>
+            {
+                IsSuccess = true,
+                Message = "User profile retrieved successfully",
+                Data = new ApplicationUserProfileViewModel(user)
             };
         }
 

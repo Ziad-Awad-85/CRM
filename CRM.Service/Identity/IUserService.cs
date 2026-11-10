@@ -1,6 +1,7 @@
 ﻿using CRM.Model.ApplicationModels;
 using CRM.Model.IdentityModels;
 using CRM.Model.InputModels;
+using CRM.Model.ViewModels;
 
 namespace CRM.Service.Identity
 {
@@ -8,6 +9,6 @@ namespace CRM.Service.Identity
     {
         Task<ResponseModel<bool>> UpdateProfileAsync(ApplicationUserProfileInputModel model, ApplicationUserContext applicationUserContext);
         Task<ResponseModel<bool>> ChangePasswordAsync(ApplicationUserChangePasswordInputModel model, ApplicationUserContext applicationUserContext);
-
+        Task<ResponseModel<ApplicationUserProfileViewModel>> GetUserProfileAsync(ApplicationUserContext applicationUserContext);
     }
 }

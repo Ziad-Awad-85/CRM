@@ -5,6 +5,7 @@ using CRM.Model.ViewModels;
 using CRM.Utility;
 using CRM.Utility.IUtility;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Reflection.Metadata.Ecma335;
@@ -19,7 +20,7 @@ namespace CRM.Service.Identity
         ITokenHandler tokenHandler
         ) : IAuthenticationService
     {
-        public async Task<ResponseModel<ApplicationUserProfileViewModel>> LoginAsync(ApplicationUserLoginInputModel model)
+        public async Task<ResponseModel<AuthenticationTokens>> LoginAsync(ApplicationUserLoginInputModel model)
         {
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
             if (result.Succeeded)
@@ -31,12 +32,18 @@ namespace CRM.Service.Identity
                     new Claim(TokenParameters.Email, user?.Email!)
                 };
                 var token = tokenHandler.GenerateJwtToken(claims);
+                var refreshToken = tokenHandler.GenerateRefreshToken();
 
-                return new ResponseModel<ApplicationUserProfileViewModel>
+                user!.RefreshTokenAttemptCount = 0;
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(tokenHandler.GetRefreshTokenExpiryDays());
+                await userManager.UpdateAsync(user);
+
+                return new ResponseModel<AuthenticationTokens>
                 {
                     IsSuccess = true,
                     Message = "Login successful",
-                    Data = new ApplicationUserProfileViewModel(user!) { Token = token}
+                    Data = new AuthenticationTokens { AccessToken = token, RefreshToken = refreshToken, IsRefreshTokenValid = true }
                 };
             }
 
@@ -44,11 +51,10 @@ namespace CRM.Service.Identity
                                   result.IsNotAllowed ? "User is not allowed to sign in." :
                                   result.RequiresTwoFactor ? "Two-factor authentication is required." :
                                   "Invalid login attempt.";
-            return new ResponseModel<ApplicationUserProfileViewModel>
+            return new ResponseModel<AuthenticationTokens>
             {
                 IsSuccess = false,
                 Message = errorMessage,
-                Data = null
             };
         }
 
@@ -159,7 +165,7 @@ namespace CRM.Service.Identity
             if (isCodeValid)
             {
                 user.EmailConfirmed = true;
-                user.Activity = true;
+                user.IsActive = true;
                 var result = await userManager.UpdateAsync(user);
                 return new ResponseModel<bool>
                 {
@@ -215,16 +221,75 @@ namespace CRM.Service.Identity
             };
         }
 
-        public async Task<ResponseModel<bool>> ChangePasswordAsync(ApplicationUserRegisterInputModel model)
+        public async Task<ResponseModel<AuthenticationTokens>> RefreshTokenAsync(AuthenticationTokens model)
         {
-            throw new NotImplementedException();
+            ArgumentNullException.ThrowIfNull(model.AccessToken);
+            ArgumentNullException.ThrowIfNull(model.RefreshToken);
+
+            var principal = tokenHandler.GetPrincipalFromExpiredToken(model.AccessToken);
+            var userEmail = principal?.Claims.FirstOrDefault(c => c.Type == TokenParameters.Email)?.Value;
+            if (string.IsNullOrEmpty(userEmail))
+                return TokenRequestFailure("Invalid token");
+
+            var user = await userManager.FindByEmailAsync(userEmail);
+            if (user is null)
+                return TokenRequestFailure("User not found");
+
+            var maxRefreshTokenAttempts = tokenHandler.GetMaxRefreshTokenAttempts();
+            if (user.RefreshTokenAttemptCount >= maxRefreshTokenAttempts)
+            {
+                user.RefreshTokenAttemptCount = 0;
+                user.IsActive = false;
+                await userManager.UpdateAsync(user);
+                return TokenRequestFailure("Refresh token limit exceeded");
+            }
+
+            if (string.IsNullOrEmpty(user.RefreshToken) 
+                || user.RefreshToken != model.RefreshToken 
+                || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            {
+                user.RefreshTokenAttemptCount += 1;
+                await userManager.UpdateAsync(user);
+                return TokenRequestFailure("Invalid refresh token");
+            }
+
+            var claims = new List<Claim>
+            {
+                new(TokenParameters.UserId, user?.Id!),
+                new(TokenParameters.Email, user?.Email!),
+
+            };
+            var newToken = tokenHandler.GenerateJwtToken(claims);
+            var newRefreshToken = tokenHandler.GenerateRefreshToken();
+
+            user!.RefreshToken = newRefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(tokenHandler.GetRefreshTokenExpiryDays());
+            user.RefreshTokenAttemptCount = 0;
+
+            try
+            {
+                await userManager.UpdateAsync(user);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return TokenRequestFailure("Failed to update user");
+            }
+            return new ResponseModel<AuthenticationTokens>
+            {
+                IsSuccess = true,
+                Message = "Token refreshed successfully",
+                Data = new AuthenticationTokens { AccessToken = newToken, RefreshToken = newRefreshToken, IsRefreshTokenValid = true }
+            };
         }
 
-
-
-        public async Task<ResponseModel<bool>> RefreshTokenAsync(ApplicationUserRegisterInputModel model)
+        private ResponseModel<AuthenticationTokens> TokenRequestFailure(string message)
         {
-            throw new NotImplementedException();
+            return new()
+            {
+                IsSuccess = false,
+                Message = message,
+                Data = new AuthenticationTokens { IsRefreshTokenValid = false }
+            };
         }
 
         public async Task<ResponseModel<bool>> ResetPasswordAsync(ApplicationUserForgotPasswordInputModel model)

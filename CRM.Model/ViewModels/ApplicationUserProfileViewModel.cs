@@ -24,7 +24,7 @@ namespace CRM.Model.ViewModels
             DateOfBirth = model.DateOfBirth;
             RegistrationDate = model.RegistrationDate;
             ImageName = model.ImageName;
-            Activity = model.Activity;
+            Activity = model.IsActive;
         }
 
     }

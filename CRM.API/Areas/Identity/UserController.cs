@@ -41,5 +41,20 @@ namespace CRM.API.Areas.Identity
             var response = await userService.ChangePasswordAsync(model, userContext);
             return response.IsSuccess ? Ok() : BadRequest(response);
         }
+
+        [HttpGet("get-user-profile")]
+        [DisplayName("Get User Profile")]
+        public async Task<IActionResult> GetUserProfile(ApplicationUserProfileInputModel model)
+        {
+            var userContext = new ApplicationUserContext
+            {
+                UserId = User.FindFirst("UserId")?.Value,
+                Email = User.FindFirst("Email")?.Value
+            };
+
+            var response = await userService.GetUserProfileAsync(userContext);
+            return response.IsSuccess ? Ok(response) : BadRequest(response);
+
+        }
     }
 }
