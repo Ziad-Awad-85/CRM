@@ -58,7 +58,7 @@
                 _currentIcon = _isDarkMode ? Icons.Material.Filled.Brightness4 : Icons.Material.Filled.Brightness7;
                 StateHasChanged();
             }
-
+            await jsRuntime.InvokeVoidAsync("eval", "document.body.style.visibility = 'visible';");
         }
     }
 
