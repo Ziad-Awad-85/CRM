@@ -9,7 +9,7 @@
 <MudPaper Style="position:relative;" Class="pa-4" Outlined="false" Square="false" Elevation="0">
     <MudText Typo="Typo.h3">@localizer["title-user-profile"]</MudText>
     <MudPaper Class="pa-4 my-2 text-center" Outlined="false" Square="false" Elevation="0">
-        <MudBadge Color="@(viewModel.Activity == true ? Color.Success : Color.Dark)" Overlap="true" Bordered="true">
+        <MudBadge Color="@(viewModel.IsActive == true ? Color.Success : Color.Dark)" Overlap="true" Bordered="true">
             <MudAvatar Style="height:70px; width:70px;" Color="Color.Primary" Variant="Variant.Outlined">
                 <MudImage Src="@imageSrc" Alt="@viewModel.FullName" Fluid="true" Class="rounded-lg" />
             </MudAvatar>
@@ -33,7 +33,7 @@
                             <MudText Typo="Typo.subtitle2"><b>@localizer["label-date-of-register"]:</b> @viewModel.RegistrationDate?.ToString("d")</MudText>
                             <MudText Typo="Typo.subtitle2">
                                 <b>@localizer["label-status"]:</b>
-                                @if (viewModel.Activity == true)
+                                @if (viewModel.IsActive == true)
                                 {
                                     <MudChip T="string" Variant="Variant.Outlined" Color="Color.Success">@localizer["status-active"]</MudChip>
                                 }
@@ -43,15 +43,7 @@
                                 }
                             </MudText>
                             <MudText Typo="Typo.subtitle2"><b>@localizer["label-description"]:</b></MudText>
-                            <MudText Typo="Typo.body2" Align="Align.Justify">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                                voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
-                                non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-                                exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit
-                                qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-                            </MudText>
+                            <MudText Typo="Typo.body2" Align="Align.Justify">@viewModel.ProfileDescription </MudText>
                         </MudStack>
                     </MudPaper>
                 </MudItem>
@@ -88,6 +80,12 @@
                             <MudDatePicker T="DateTime" Label="@localizer["input-date-of-birth"]"
                             @bind-Date="updateModel.DateOfBirth"
                             Class="mt-4" />
+
+                            <MudTextField T="string" Label="@localizer["profile-description"]"
+                                          @bind-Value="updateModel.ProfileDescription"
+                                          Lines="5"
+                                          MaxLength="500"
+                                          Class="mt-4" />
 
                             <div class="d-flex align-center justify-space-between mt-4">
                                 <MudSpacer />
@@ -192,6 +190,7 @@
             updateModel.FirstName = viewModel.FirstName ?? string.Empty;
             updateModel.LastName = viewModel.LastName ?? string.Empty;
             updateModel.DateOfBirth = viewModel.DateOfBirth;
+            updateModel.ProfileDescription = viewModel.ProfileDescription ?? string.Empty;
 
             selectedGender = viewModel.Gender?.ToString() ?? string.Empty;
 
@@ -228,7 +227,14 @@
         var response = await userServiceService.UpdateUserProfileAsync(updateModel);
         loading = false;
         if (response.IsSuccess)
+        {
+            viewModel.FirstName = updateModel.FirstName;
+            viewModel.LastName = updateModel.LastName;
+            viewModel.DateOfBirth = updateModel.DateOfBirth;
+            viewModel.ProfileDescription = updateModel.ProfileDescription;
+
             snackbar.Add(localizer["message-profile-updated-successfully"], Severity.Success);
+        }
         else
             updateErrors = new string[] { response.Message ?? string.Empty };
     }

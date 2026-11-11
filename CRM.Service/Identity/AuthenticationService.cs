@@ -20,10 +20,23 @@ namespace CRM.Service.Identity
     {
         public async Task<ResponseModel<AuthenticationTokens>> LoginAsync(ApplicationUserLoginInputModel model)
         {
+            ArgumentNullException.ThrowIfNull(model.Email);
+            ArgumentNullException.ThrowIfNull(model.Password);
+
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
             if (result.Succeeded)
             {
                 var user = await userManager.FindByEmailAsync(model.Email);
+                if (user!.IsActive == false)
+                {
+                    return new ResponseModel<AuthenticationTokens>
+                    {
+                        IsSuccess = false,
+                        Message = "User is inactive."
+                    };
+                }
+
                 var claims = new List<Claim>
                 {
                     new Claim(TokenParameters.UserId, user?.Id!),
