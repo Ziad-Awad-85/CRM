@@ -24,7 +24,7 @@ namespace CRM.API.Areas.Identity
                 Email = User.FindFirst("Email")?.Value
             };
             var response = await userService.UpdateProfileAsync(model, userContext);
-            return response.IsSuccess ? Ok() : BadRequest(response);
+            return response.IsSuccess ? Ok(response) : BadRequest(response);
         }
 
         [HttpPost("change-password")]
@@ -37,12 +37,12 @@ namespace CRM.API.Areas.Identity
                 Email = User.FindFirst("Email")?.Value
             };
             var response = await userService.ChangePasswordAsync(model, userContext);
-            return response.IsSuccess ? Ok() : BadRequest(response);
+            return response.IsSuccess ? Ok(response) : BadRequest(response);
         }
 
         [HttpGet("get-user-profile")]
         [DisplayName("Get User Profile")]
-        public async Task<IActionResult> GetUserProfile(ApplicationUserProfileInputModel model)
+        public async Task<IActionResult> GetUserProfile()
         {
             var userContext = new ApplicationUserContext
             {

@@ -15,7 +15,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         var apiBaseAddress = builder.Configuration["ApiBaseAddress"];
-        builder.Services.AddHttpClient(" ", client =>
+        builder.Services.AddHttpClient("DefaultClient", client =>
         {
             client.BaseAddress = new Uri(apiBaseAddress!);
         });

@@ -180,7 +180,10 @@
   <data name="message-lastname-required" xml:space="preserve">
     <value>Achternaam is verplicht!</value>
   </data>
-  <data name="input-dateofbirth" xml:space="preserve">
+  <data name="input-date-of-birth" xml:space="preserve">
+    <value>Geboortedatum</value>
+  </data>
+  <data name="label-date-of-birth" xml:space="preserve">
     <value>Geboortedatum</value>
   </data>
   <data name="input-confirm-password" xml:space="preserve">
@@ -281,5 +284,74 @@
   </data>
   <data name="button-reset-password" xml:space="preserve">
     <value>Wachtwoord resetten</value>
+  </data>
+  <data name="button-update" xml:space="preserve">
+    <value>Bijwerken</value>
+  </data>
+  <data name="title-user-profile" xml:space="preserve">
+    <value>Gebruikersprofiel</value>
+  </data>
+  <data name="tab-details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="tab-edit" xml:space="preserve">
+    <value>Bewerken</value>
+  </data>
+  <data name="tab-change-password" xml:space="preserve">
+    <value>Wachtwoord wijzigen</value>
+  </data>
+  <data name="input-current-password" xml:space="preserve">
+    <value>Huidig wachtwoord</value>
+  </data>
+  <data name="label-full-name" xml:space="preserve">
+    <value>Volledige naam</value>
+  </data>
+  <data name="label-date-of-register" xml:space="preserve">
+    <value>Registratiedatum</value>
+  </data>
+  <data name="label-status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="status-active" xml:space="preserve">
+    <value>Actief</value>
+  </data>
+  <data name="status-inactive" xml:space="preserve">
+    <value>Inactief</value>
+  </data>
+  <data name="label-description" xml:space="preserve">
+    <value>Beschrijving</value>
+  </data>
+  <data name="message-profile-updated-successfully" xml:space="preserve">
+    <value>Profiel succesvol bijgewerkt!</value>
+  </data>
+  <data name="message-password-changed-successfully" xml:space="preserve">
+    <value>Wachtwoord succesvol gewijzigd!</value>
+  </data>
+  <data name="message-user-is-inactive" xml:space="preserve">
+    <value>Uw account is inactief. Om het te reactiveren, kunt u contact opnemen met het ondersteuningsteam.</value>
+  </data>
+  <data name="profile-description" xml:space="preserve">
+    <value>Profielbeschrijving</value>
+  </data>
+  <data name="message-login-again-auth-error" xml:space="preserve">
+    <value>Er is iets misgegaan met uw huidige sessie. Log alstublieft opnieuw in.</value>
+  </data>
+  <data name="menu-home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="menu-user-profile" xml:space="preserve">
+    <value>Gebruikersprofiel</value>
+  </data>
+  <data name="menu-logout" xml:space="preserve">
+    <value>Uitloggen</value>
+  </data>
+  <data name="menu-login" xml:space="preserve">
+    <value>Inloggen</value>
+  </data>
+  <data name="menu-register" xml:space="preserve">
+    <value>Registreren</value>
+  </data>
+  <data name="menu-about" xml:space="preserve">
+    <value>Over</value>
   </data>
 </root>

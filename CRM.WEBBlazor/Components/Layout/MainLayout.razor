@@ -1,8 +1,7 @@
-﻿@using MudBlazor
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 @inject IJSRuntime jsRuntime
 @inject TokenStore tokenStore
-@inject NavigationManager navManager
+
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
 <MudPopoverProvider />
 <MudDialogProvider />
@@ -24,7 +23,7 @@
     </MudMainContent>
 </MudLayout>
 @code {
-    bool _IsInitialized = false
+    bool _IsInitialized = false;
     bool _drawerOpen = true;
     bool _isDarkMode = false;
     string _currentIcon = Icons.Material.Filled.Brightness7;

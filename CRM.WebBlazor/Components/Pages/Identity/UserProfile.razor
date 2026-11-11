@@ -180,9 +180,6 @@
             }
             loading = false;
 
-            if (string.IsNullOrEmpty(viewModel.Token))
-                navManager.NavigateTo("/Identity/login");
-
             imageSrc = string.IsNullOrEmpty(viewModel.ImageName)
                 ? GetImagePath(DefaultAvatar)
                 : GetImagePath(viewModel.ImageName);
