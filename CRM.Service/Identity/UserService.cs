@@ -3,9 +3,6 @@ using CRM.Model.IdentityModels;
 using CRM.Model.InputModels;
 using CRM.Model.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CRM.Service.Identity
 {

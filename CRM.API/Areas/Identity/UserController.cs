@@ -1,11 +1,9 @@
-﻿using CRM.Model.ViewModels;
+﻿using CRM.Model.IdentityModels;
+using CRM.Model.InputModels;
 using CRM.Service.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
-using CRM.Model.InputModels;
-using CRM.Model.IdentityModels;
 namespace CRM.API.Areas.Identity
 
 {

@@ -1,7 +1,4 @@
 ﻿using CRM.Model.IdentityModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CRM.Model.ViewModels
 {

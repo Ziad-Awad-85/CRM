@@ -26,6 +26,15 @@ namespace CRM.WebBlazor.Service
             };
         }
 
+        public ResponseModel<T> HandleErrorResponse<T>(ResponseModel<T>? response)
+        {
+            return new ResponseModel<T>
+            {
+                IsSuccess = false,
+                Message = GetLocalizedErrorMessage(response?.Message) ?? localizer["message-unknown-error"]
+            };
+        }
+
         private string GetLocalizedErrorMessage(string? message)
         {
             var resourceKey = message switch

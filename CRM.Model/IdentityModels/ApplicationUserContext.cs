@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CRM.Model.IdentityModels
+﻿namespace CRM.Model.IdentityModels
 {
     public class ApplicationUserContext
     {

@@ -1,14 +1,12 @@
 ﻿using CRM.Model.ApplicationModels;
 using CRM.Model.IdentityModels;
 using CRM.Model.InputModels;
-using CRM.Model.ViewModels;
 using CRM.Utility;
 using CRM.Utility.IUtility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 
 namespace CRM.Service.Identity
@@ -244,8 +242,8 @@ namespace CRM.Service.Identity
                 return TokenRequestFailure("Refresh token limit exceeded");
             }
 
-            if (string.IsNullOrEmpty(user.RefreshToken) 
-                || user.RefreshToken != model.RefreshToken 
+            if (string.IsNullOrEmpty(user.RefreshToken)
+                || user.RefreshToken != model.RefreshToken
                 || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
             {
                 user.RefreshTokenAttemptCount += 1;
