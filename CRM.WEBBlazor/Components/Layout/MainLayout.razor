@@ -1,6 +1,8 @@
 ﻿@using MudBlazor
 @inherits LayoutComponentBase
 @inject IJSRuntime jsRuntime
+@inject TokenStore tokenStore
+@inject NavigationManager navManager
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
 <MudPopoverProvider />
 <MudDialogProvider />
@@ -22,6 +24,7 @@
     </MudMainContent>
 </MudLayout>
 @code {
+    bool _IsInitialized = false
     bool _drawerOpen = true;
     bool _isDarkMode = false;
     string _currentIcon = Icons.Material.Filled.Brightness7;
@@ -41,8 +44,13 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (firstRender && !_IsInitialized)
         {
+            _IsInitialized = true;
+
+            if (!tokenStore.IsInitialized)
+                await tokenStore.LoadFromStorageAsync(jsRuntime);
+
             var darkMode = await jsRuntime.InvokeAsync<string>("localStorage.getItem", "dark-mode");
             if (!string.IsNullOrEmpty(darkMode))
             {
